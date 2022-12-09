@@ -48,6 +48,13 @@ def path_planning(num_frames, x, y, z, path_type=''):
             ys += [np.sin(bs_shift_val * np.pi) * 1 * y]
             zs += [np.cos(bs_shift_val * np.pi/2.) * 1 * z]
         xs, ys, zs = np.array(xs), np.array(ys), np.array(zs)
+    elif path_type == 'orbit':
+        xs, ys, zs = [], [], []
+        for frame_id, angle in enumerate(np.arange(0, 2*np.pi, (2*np.pi/num_frames))):
+            xs += [np.cos(angle) * 1 * x]
+            ys += [np.sin(angle) * 1 * y]
+            zs += [np.cos(angle) * 1 * z]
+        xs, ys, zs = np.array(xs), np.array(ys), np.array(zs)
 
     return xs, ys, zs
 
