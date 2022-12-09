@@ -55,6 +55,20 @@ def path_planning(num_frames, x, y, z, path_type=''):
             ys += [np.sin(angle) * 1 * y]
             zs += [np.cos(angle) * 1 * z]
         xs, ys, zs = np.array(xs), np.array(ys), np.array(zs)
+    elif path_type == 'wave':
+        xs, ys, zs = [], [], []
+        for frame_id, bs_shift_val in enumerate(np.arange(0, 2*np.pi, (2*np.pi/num_frames))):
+            xs += [np.cos(bs_shift_val) * 1 * x]
+            ys += [np.sin(bs_shift_val) * 1 * y]
+            zs += [np.sin(bs_shift_val) * 1 * z]
+        xs, ys, zs = np.array(xs), np.array(ys), np.array(zs)
+    elif path_type == 'spiral':
+        xs, ys, zs = [], [], []
+        for frame_id, bs_shift_val in enumerate(np.arange(0, 2*np.pi, (2*np.pi/num_frames))):
+            xs += [np.cos(bs_shift_val) * 1 * x * frame_id]
+            ys += [np.sin(bs_shift_val) * 1 * y * frame_id]
+            zs += [np.sin(bs_shift_val) * 1 * z * frame_id]
+        xs, ys, zs = np.array(xs), np.array(ys), np.array(zs)
 
     return xs, ys, zs
 
